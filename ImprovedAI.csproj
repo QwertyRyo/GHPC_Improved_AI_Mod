@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <RootNamespace>ImprovedAI</RootNamespace>
+    <AssemblyName>ImprovedAI</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <OutputPath>C:\Program Files (x86)\Steam\steamapps\common\Gunner HEAT PC\Bin\Mods\</OutputPath>
+    <Optimize>true</Optimize>
+    <DebugType>none</DebugType>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="0Harmony">
+      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Gunner HEAT PC\Bin\MelonLoader\net35\0Harmony.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Assembly-CSharp">
+      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Gunner HEAT PC\Bin\GHPC_Data\Managed\Assembly-CSharp.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="BehaviorDesigner.Runtime">
+      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Gunner HEAT PC\Bin\GHPC_Data\Managed\BehaviorDesigner.Runtime.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="MelonLoader">
+      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Gunner HEAT PC\Bin\MelonLoader\net35\MelonLoader.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="AstarPathfindingProject">
+      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Gunner HEAT PC\Bin\GHPC_Data\Managed\AstarPathfindingProject.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="System">
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="System.Core">
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Unity.Addressables">
+      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Gunner HEAT PC\Bin\GHPC_Data\Managed\Unity.Addressables.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Unity.ResourceManager">
+      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Gunner HEAT PC\Bin\GHPC_Data\Managed\Unity.ResourceManager.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Gunner HEAT PC\Bin\GHPC_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="PackageTools">
+      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Gunner HEAT PC\Bin\GHPC_Data\Managed\PackageTools.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Drawing">
+      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Gunner HEAT PC\Bin\GHPC_Data\Managed\Drawing.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.PhysicsModule">
+      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Gunner HEAT PC\Bin\GHPC_Data\Managed\UnityEngine.PhysicsModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.InputLegacyModule">
+      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Gunner HEAT PC\Bin\GHPC_Data\Managed\UnityEngine.InputLegacyModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.IMGUIModule">
+      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Gunner HEAT PC\Bin\GHPC_Data\Managed\UnityEngine.IMGUIModule.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Rewired_Core">
+      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Gunner HEAT PC\Bin\GHPC_Data\Managed\Rewired_Core.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ImprovedAI.cs" />
+    <Compile Include="HitscanMarker.cs" />
+    <Compile Include="IR_Lights.cs" />
+    <Compile Include="HoldFire.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
