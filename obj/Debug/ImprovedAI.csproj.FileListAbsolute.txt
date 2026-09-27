@@ -1,4 +1,0 @@
-C:\Program Files (x86)\Steam\steamapps\common\Gunner HEAT PC\Bin\Mods\ImprovedAI.dll
-C:\Users\ryans\Documents\Projects\GHPC_Modding_Stuff\ImprovedAI\obj\Debug\ImprovedAI.csproj.AssemblyReference.cache
-C:\Users\ryans\Documents\Projects\GHPC_Modding_Stuff\ImprovedAI\obj\Debug\ImprovedAI.csproj.CoreCompileInputs.cache
-C:\Users\ryans\Documents\Projects\GHPC_Modding_Stuff\ImprovedAI\obj\Debug\ImprovedAI.dll
