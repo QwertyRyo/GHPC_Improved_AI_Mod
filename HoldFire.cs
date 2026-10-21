@@ -17,10 +17,11 @@ namespace ImprovedAI {
 
     internal static void SetPlatoonHoldFire(PlatoonData platoon, bool hold) {
       if (platoon?.Units == null) return;
+      var playerUnit = PlayerInput.Instance?.CurrentPlayerUnit;
       foreach (var unit in platoon.Units) {
         if (unit == null) continue;
         if (hold) {
-          if (unit != PlayerInput.Instance?.CurrentPlayerUnit)
+          if (unit != playerUnit)
             HoldFire.Add(unit);
         } else {
           HoldFire.Remove(unit);
@@ -103,8 +104,39 @@ namespace ImprovedAI {
     static void Postfix(WeaponSystem __instance, ref bool __result) {
       if (!__result) return;
       var unit = __instance.GetComponentInParent<Unit>();
-      if (unit != null && HoldFireState.HoldFire.Contains(unit))
-        __result = false;
+      if (unit != null) {
+        var playerUnit = PlayerInput.Instance?.CurrentPlayerUnit;
+        if (unit == playerUnit) {
+          return;
+        }
+        if (HoldFireState.HoldFire.Contains(unit))
+          __result = false;
+      }
+    }
+  }
+
+  [HarmonyPatch(typeof(PlayerInput), nameof(PlayerInput.SetPlayerUnit))]
+  public static class PlayerUnitSwitchPatch {
+    [HarmonyPrefix]
+    static void Prefix(PlayerInput __instance, Unit newUnit) {
+      var oldUnit = __instance.CurrentPlayerUnit;
+      if (oldUnit != null && newUnit != null && oldUnit != newUnit) {
+        if (oldUnit.PlatoonInitialized && oldUnit.Platoon != null) {
+          var platoon = oldUnit.Platoon;
+          bool platoonHasHoldFire = false;
+          if (platoon.Units != null) {
+            foreach (var unit in platoon.Units) {
+              if (unit != oldUnit && HoldFireState.HoldFire.Contains(unit)) {
+                platoonHasHoldFire = true;
+                break;
+              }
+            }
+          }
+          if (platoonHasHoldFire) {
+            HoldFireState.HoldFire.Add(oldUnit);
+          }
+        }
+      }
     }
   }
 

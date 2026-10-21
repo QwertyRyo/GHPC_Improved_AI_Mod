@@ -143,7 +143,7 @@ namespace ImprovedAI {
       if (isGunnerView) return;
 
       Vector3 fwd = (cam != null) ? cam.transform.forward : Vector3.zero;
-      MelonLogger.Msg($"[Hitscan] forward=({fwd.x:F4}, {fwd.y:F8}, {fwd.z:F8})");
+      //MelonLogger.Msg($"[Hitscan] forward=({fwd.x:F4}, {fwd.y:F8}, {fwd.z:F8})");
       var binos = FirstPersonBinocularsAnimator.Instance;
       string armyName = "null";
       if (binos != null) {
@@ -159,7 +159,7 @@ namespace ImprovedAI {
 
       //draw ray
       if (CameraUtils.Hitscan(out Vector3 hitPoint, pitchOffsetDeg: pitchDeg)) {
-        MelonLogger.Msg($"[Hitscan] hitPoint={hitPoint}");
+        //MelonLogger.Msg($"[Hitscan] hitPoint={hitPoint}");
         bool triggeredRed = false;
         if (HitWorldPos.HasValue && Time.time - HitTime <= 2f) {
           Vector3 diff = hitPoint - HitWorldPos.Value;
@@ -175,7 +175,7 @@ namespace ImprovedAI {
               PlatoonAimTarget = RedHitWorldPos;
               PlatoonAimStartTime = Time.time;
               PlatoonHullTurn = true;
-              MelonLogger.Msg($"[PlatoonAim] RED triggered, aimTarget={RedHitWorldPos}, hullTurn=true");
+              //MelonLogger.Msg($"[PlatoonAim] RED triggered, aimTarget={RedHitWorldPos}, hullTurn=true");
             }
           }
         }
@@ -185,7 +185,7 @@ namespace ImprovedAI {
           PlatoonAimTarget = hitPoint;
           PlatoonAimStartTime = Time.time;
           PlatoonHullTurn = false;
-          MelonLogger.Msg($"[PlatoonAim] ORANGE triggered, aimTarget={hitPoint}, hullTurn=false");
+          //MelonLogger.Msg($"[PlatoonAim] ORANGE triggered, aimTarget={hitPoint}, hullTurn=false");
         }
       } else {
         HitWorldPos = null;
@@ -211,20 +211,18 @@ namespace ImprovedAI {
 
       var player = PlayerInput.Instance;
       if (player == null) { 
-        MelonLogger.Msg("Err: No PlayerInput"); 
         return; 
       }
       var playerUnit = player.CurrentPlayerUnit;
       if (playerUnit == null) { 
-        MelonLogger.Msg("Err: No CurrentPlayerUnit"); 
         return; 
       }
       if (!playerUnit.PlatoonInitialized) { 
-        MelonLogger.Msg("Err: Platoon not initialized"); return; 
+      return; 
       }
       var platoon = playerUnit.Platoon;
       if (platoon?.Units == null) { 
-        MelonLogger.Msg("Err: Platoon.Units is null"); return; 
+return; 
       }
 
       Vector3 aimPos = PlatoonAimTarget.Value;
@@ -237,11 +235,11 @@ namespace ImprovedAI {
 
         var unitAI = unit.GetComponentInChildren<UnitAI>();
         if (unitAI == null) { 
-          MelonLogger.Msg($"{uname}: no UnitAI");
+          //MelonLogger.Msg($"{uname}: no UnitAI");
           continue; 
         }
         if (unitAI.HasTarget) { 
-          MelonLogger.Msg($"[PlatoonAim] {uname}: skipped (HasTarget)"); continue; 
+          //MelonLogger.Msg($"[PlatoonAim] {uname}: skipped (HasTarget)"); continue; 
         }
 
         //turret aiming
@@ -250,9 +248,7 @@ namespace ImprovedAI {
           var role = wm.ActiveWeapon != null ? wm.ActiveWeapon.Role : unitAI.UCI.FirstWeaponSystemRole;
           wm.SetAimPosition(role, aimPos);
           //MelonLogger.Msg($"{uname}: SetAimPosition role={role} pos={aimPos}");
-        } else {
-          MelonLogger.Msg($"Err: {uname}: WeaponsModule is null (UCI={unitAI.UCI != null}, GB={unitAI.UCI?.GunnerBrain != null})");
-        }
+        } 
 
         // Hull turning 
         if (PlatoonHullTurn) {
